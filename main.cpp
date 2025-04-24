@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 
 int main() {
@@ -23,4 +21,3 @@ int main() {
     std::clog<<"\rDone. \n";
     return 0;
 }
-

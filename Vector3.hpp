@@ -15,7 +15,7 @@ class Vector3 {
         friend inline Vector3 operator*(Vector3 &v, double t);
         friend inline Vector3 operator/(Vector3 v, double t);
         friend inline double dot(const Vector3 &u, const Vector3 &v);
-        friend inline double cross(const Vector3 &u, const Vector3 &v);
+        friend inline Vector3 cross(const Vector3 &u, const Vector3 &v);
         
         double x() const {return e[0];}
         double y() const {return e[1];}
@@ -31,6 +31,20 @@ class Vector3 {
             e[0] += v.e[0];
             e[1] += v.e[1];
             e[2] += v.e[2];
+            return *this;
+        }
+
+        Vector3& operator*=(const Vector3& v) {
+            e[0] *= v.e[0];
+            e[1] *= v.e[1];
+            e[2] *= v.e[2];
+            return *this;
+        }
+
+        Vector3& operator-=(const Vector3& v) {
+            e[0] -= v.e[0];
+            e[1] -= v.e[1];
+            e[2] -= v.e[2];
             return *this;
         }
         
@@ -55,5 +69,5 @@ class Vector3 {
 
     private:
         double e[3]; 
-}
+};
 
