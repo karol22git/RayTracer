@@ -21,7 +21,7 @@ Vector3 operator*(Vector3 u, const Vector3 &v) {
     return u;
 }
 
-Vector3 operator*(double t, Vector3 & v) {
+Vector3 operator*(double t, const Vector3 & v) {
     v *= t;
     return v;
 }

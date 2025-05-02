@@ -1,21 +1,21 @@
+#pragma once
 #include <cmath>
 #include <iostream>
-
 
 class Vector3 {
     public:
         Vector3(): e{0,0,0} {}
         Vector3(const double e0, const double e1, const double e2): e{e0,e1,e2} {}
 
-        friend inline std::ostream& operator <<(std::ostream& out, const Vector3 &v);
-        friend inline Vector3 operator+(Vector3 u, const Vector3 &v);
-        friend inline Vector3 operator-(Vector3 u, const Vector3 &v);
-        friend inline Vector3 operator*(Vector3 u, const Vector3 &v);
-        friend inline Vector3 operator*(double t, Vector3 & v);
-        friend inline Vector3 operator*(Vector3 &v, double t);
-        friend inline Vector3 operator/(Vector3 v, double t);
-        friend inline double dot(const Vector3 &u, const Vector3 &v);
-        friend inline Vector3 cross(const Vector3 &u, const Vector3 &v);
+        friend  std::ostream& operator <<(std::ostream& out, const Vector3 &v);
+        friend  Vector3 operator+(Vector3 u, const Vector3 &v);
+        friend  Vector3 operator-(Vector3 u, const Vector3 &v);
+        friend  Vector3 operator*(Vector3 u, const Vector3 &v);
+        friend  Vector3 operator*(double t, const Vector3 & v);
+        friend  Vector3 operator*(Vector3 &v, double t);
+        friend  Vector3 operator/(Vector3 v, double t);
+        friend  double dot(const Vector3 &u, const Vector3 &v);
+        friend  Vector3 cross(const Vector3 &u, const Vector3 &v);
         
         double x() const {return e[0];}
         double y() const {return e[1];}
@@ -70,4 +70,4 @@ class Vector3 {
     private:
         double e[3]; 
 };
-
+using Point3 = Vector3;
