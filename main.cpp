@@ -33,7 +33,8 @@ int main() {
            auto ray_direction = pixel_center - camera_center;
            Ray r(camera_center,ray_direction);
           //color pixel_color = ray_color(r);
-           color pixel_color = my_ray_color_manipulator(r,color(0.0,1.0,0.0),color(0.0,0.0,0.0),'y');
+          // color pixel_color = my_ray_color_manipulator(r,color(0.0,1.0,0.0),color(0.0,0.0,0.0),'y');
+          color pixel_color = ray_color_with_sphere(r,Point3(0,0,-1),0.5,color(0.5,0.0,0.5));
            write_color(std::cout,pixel_color);
         }
     }
