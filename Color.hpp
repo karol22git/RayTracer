@@ -59,13 +59,19 @@ rownania sfery pod katem tego, czy dane promien przez nia przechodzi, czy nie.
 Promien przechodzi przez sfery, wtedy i tylko wtedy gdy delta
 rownania powstalego po podstawieniaach z rownania sfery jest wieksza badz rowna 0
 */
-bool hit_sphere(const Point3& center, double radius, const Ray& r) {
+double hit_sphere(const Point3& center, double radius, const Ray& r) {
     Vector3 oc = center - r.origin(); //
     auto a = dot(r.direction(), r.direction());
     auto b = -2.0 * dot(r.direction(), oc);
     auto c = dot(oc, oc) - radius*radius;
     auto discriminant = b*b - 4*a*c;
-    return (discriminant >= 0);
+    //musimy teraz znac gdzie sfera zostala uderzona.
+    //obliczne to jest punkt uderzenia minus centrum sfery
+    if (discriminant < 0) {
+        return -1.0;
+    } else {
+        return (-b - std::sqrt(discriminant) ) / (2.0*a);
+    }
 }
 
 /*
@@ -73,11 +79,15 @@ kod tworzy na ekranie sfere o zadanym kolorze sphere_color,
 w zadnamy srodku C i o zadanym promieniu radius
 */
 color ray_color_with_sphere(const Ray& r, Point3 C, double radius,color sphere_color) {
-    if (hit_sphere(C, radius, r)) return sphere_color;
-
+   // if (hit_sphere(C, radius, r)) return sphere_color;
+    auto t = hit_sphere(C, radius, r);
+    if (t > 0.0) {
+        Vector3 N = unit_vector(r.at(t) - C);
+        return 0.5*color(N.x()+1, N.y()+1, N.z()+1);
+    }
     Vector3 unit_dir = unit_vector(r.direction());
     auto a = 0.5*(unit_dir.y() +1.0);
-    return (1.0-a)*color(1.0,1.0,1.0) + a*color(1.0,0.0,0.0);
+    return (1.0-a)*color(1.0,1.0,1.0) + a*color(0.5,0.7,1.0);
 }
 
 
