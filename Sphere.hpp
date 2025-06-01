@@ -1,8 +1,23 @@
+#pragma once
 #include "Vector3.hpp"
 #include "Ray.hpp"
 #include "Constants.hpp"
 #include <math.h>
 using Color = Vector3;
+double hit_sphere(const Point3& center, double radius, const Ray& r) {
+    Vector3 oc = center - r.origin(); //
+    auto a = dot(r.direction(), r.direction());
+    auto b = -2.0 * dot(r.direction(), oc);
+    auto c = dot(oc, oc) - radius*radius;
+    auto discriminant = b*b - 4*a*c;
+    //musimy teraz znac gdzie sfera zostala uderzona.
+    //obliczne to jest punkt uderzenia minus centrum sfery
+    if (discriminant < 0) {
+        return -1.0;
+    } else {
+        return (-b - std::sqrt(discriminant) ) / (2.0*a);
+    }
+}
 class Sphere {
     public:
         Sphere(const Point3& center, const double _radius, const Color& _color): C(center), radius(_radius),color(_color){}
