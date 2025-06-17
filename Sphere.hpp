@@ -2,6 +2,7 @@
 #include "Vector3.hpp"
 #include "Ray.hpp"
 #include "Constants.hpp"
+#include "Hittable.hpp"
 #include <math.h>
 using Color = Vector3;
 double hit_sphere(const Point3& center, double radius, const Ray& r) {
@@ -18,10 +19,10 @@ double hit_sphere(const Point3& center, double radius, const Ray& r) {
         return (-b - std::sqrt(discriminant) ) / (2.0*a);
     }
 }
-class Sphere {
+class Sphere : public hittable {
     public:
         Sphere(const Point3& center, const double _radius, const Color& _color): C(center), radius(_radius),color(_color){}
-        bool hit(const Ray& r, double ray_tmin, double ray_tmax, hit_record& rec) {
+        bool hit(const Ray& r, double ray_tmin, double ray_tmax, hit_record& rec) const {
             Vector3 oc = C - r.origin(); 
             auto a = dot(r.direction(), r.direction());
             auto b = -2.0 * dot(r.direction(), oc);
