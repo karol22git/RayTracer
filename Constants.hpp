@@ -5,6 +5,7 @@
 #include <iostream>
 #include <limits>
 #include <memory>
+#include <random>
 
 using color = Vector3;
 using std::make_shared;
@@ -30,3 +31,8 @@ struct hit_record {
         normal = front_face ? outward_normal : -outward_normal;
     }
 };
+inline double random_double() {
+    static std::uniform_real_distribution<double> distribution(0.0, 1.0);
+    static std::mt19937 generator;
+    return distribution(generator);
+}
